@@ -92,3 +92,7 @@ POLICY
   name                 = "omnistrate-eks-iam-role"
   path                 = "/"
 }
+
+output "bootstrap-role" {
+  value = aws_iam_role.omnistrate-bootstrap-role.arn
+}
