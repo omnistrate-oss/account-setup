@@ -337,6 +337,21 @@ resource "aws_iam_policy" "omnistrate-bootstrap-permissions-boundary" {
       "Effect": "Allow",
       "Resource": "*",
       "Sid": "VisualEditor1"
+    },
+    {
+      "Sid": "S3Access",
+      "Effect": "Allow",
+      "Action": [
+          "s3:PutObject",
+          "s3:GetObject",
+          "s3:CreateBucket",
+          "s3:DeleteObject",
+          "s3:DeleteBucket"
+      ],
+      "Resource": [
+          "arn:aws:s3:::omnistrate-${data.aws_caller_identity.current.account_id}-dp-pulumi",
+          "arn:aws:s3:::*/*"
+      ]
     }
   ],
   "Version": "2012-10-17"
@@ -440,6 +455,21 @@ resource "aws_iam_policy" "omnistrate-bootstrap-policy" {
       "Effect": "Allow",
       "Resource": "*",
       "Sid": "VisualEditor2"
+    },
+    {
+      "Sid": "S3Access",
+      "Effect": "Allow",
+      "Action": [
+          "s3:PutObject",
+          "s3:GetObject",
+          "s3:CreateBucket",
+          "s3:DeleteObject",
+          "s3:DeleteBucket"
+      ],
+      "Resource": [
+          "arn:aws:s3:::omnistrate-${data.aws_caller_identity.current.account_id}-dp-pulumi",
+          "arn:aws:s3:::*/*"
+      ]
     }
   ],
   "Version": "2012-10-17"
