@@ -345,7 +345,8 @@ resource "aws_iam_policy" "omnistrate-bootstrap-permissions-boundary" {
           "s3:*"
       ],
       "Resource": [
-          "arn:aws:s3:::omnistrate-${data.aws_caller_identity.current.account_id}-dp-pulumi"
+          "arn:aws:s3:::omnistrate-${data.aws_caller_identity.current.account_id}-dp-pulumi",
+          "arn:aws:s3:::omnistrate-${data.aws_caller_identity.current.account_id}-dp-pulumi/*"
       ]
     }
   ],
@@ -458,7 +459,8 @@ resource "aws_iam_policy" "omnistrate-bootstrap-policy" {
         "s3:*"
       ],
       "Resource": [
-          "arn:aws:s3:::omnistrate-${data.aws_caller_identity.current.account_id}-dp-pulumi"
+          "arn:aws:s3:::omnistrate-${data.aws_caller_identity.current.account_id}-dp-pulumi",
+          "arn:aws:s3:::omnistrate-${data.aws_caller_identity.current.account_id}-dp-pulumi/*"
       ]
     }
   ],
