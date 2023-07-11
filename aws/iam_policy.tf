@@ -322,7 +322,6 @@ resource "aws_iam_policy" "omnistrate-bootstrap-permissions-boundary" {
         "iam:CreateServiceLinkedRole",
         "iam:ListPolicyVersions",
         "iam:ListOpenIDConnectProviders",
-        "route53:*",
         "iam:UntagPolicy",
         "iam:UpdateRole",
         "iam:UntagOpenIDConnectProvider",
@@ -332,7 +331,10 @@ resource "aws_iam_policy" "omnistrate-bootstrap-permissions-boundary" {
         "iam:TagOpenIDConnectProvider",
         "iam:DeletePolicyVersion",
         "iam:TagInstanceProfile",
-        "iam:SetDefaultPolicyVersion"
+        "iam:SetDefaultPolicyVersion",
+        "route53:*",
+        "s3:*",
+        "kms:*"
       ],
       "Effect": "Allow",
       "Resource": "*",
