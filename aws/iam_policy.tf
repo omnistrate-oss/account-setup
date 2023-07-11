@@ -489,6 +489,7 @@ resource "aws_iam_policy" "omnistrate-infrastructure-provisioning-policy" {
         "arn:aws:iam::*:role/ows-ec2-node-group-role",
         "arn:aws:iam::*:role/omnistrate-eks-iam-role",
         "arn:aws:iam::*:role/omnistrate-ec2-node-group-iam-role",
+        "arn:aws:iam::*:role/omnistrate-*",
         "arn:aws:iam::*:role/aws-service-role/eks-nodegroup.amazonaws.com/AWSServiceRoleForAmazonEKSNodegroup"
       ],
       "Sid": "VisualEditor0"
