@@ -304,7 +304,7 @@ resource "aws_iam_policy" "omnistrate-bootstrap-permissions-boundary" {
         "iam:CreateInstanceProfile",
         "iam:UntagRole",
         "iam:TagRole",
-				"iam:TagPolicy",
+	"iam:TagPolicy",
         "iam:ListPoliciesGrantingServiceAccess",
         "iam:ResetServiceSpecificCredential",
         "iam:ListInstanceProfileTags",
@@ -481,9 +481,7 @@ resource "aws_iam_policy" "omnistrate-infrastructure-provisioning-policy" {
   "Statement": [
     {
       "Action": [
-        "iam:GetRole",
-        "iam:PassRole",
-        "iam:ListAttachedRolePolicies"
+        "iam:*",
       ],
       "Effect": "Allow",
       "Resource": [
