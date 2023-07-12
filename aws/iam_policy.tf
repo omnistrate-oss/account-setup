@@ -291,6 +291,7 @@ resource "aws_iam_policy" "omnistrate-bootstrap-permissions-boundary" {
         "iam:RemoveClientIDFromOpenIDConnectProvider",
         "iam:ListEntitiesForPolicy",
         "iam:DeleteRole",
+	"iam:DeletePolicy",
         "iam:UpdateRoleDescription",
         "iam:GetUserPolicy",
         "iam:ListGroupsForUser",
