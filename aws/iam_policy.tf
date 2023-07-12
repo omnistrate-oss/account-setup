@@ -268,8 +268,7 @@ resource "aws_iam_policy" "omnistrate-bootstrap-permissions-boundary" {
         }
       },
       "Effect": "Allow",
-      "Resource": "*",
-      "Sid": "VisualEditor0"
+      "Resource": "*"
     },
     {
       "Action": [
@@ -292,6 +291,7 @@ resource "aws_iam_policy" "omnistrate-bootstrap-permissions-boundary" {
         "iam:RemoveClientIDFromOpenIDConnectProvider",
         "iam:ListEntitiesForPolicy",
         "iam:DeleteRole",
+	"iam:DeletePolicy",
         "iam:UpdateRoleDescription",
         "iam:GetUserPolicy",
         "iam:ListGroupsForUser",
@@ -304,6 +304,7 @@ resource "aws_iam_policy" "omnistrate-bootstrap-permissions-boundary" {
         "iam:CreateInstanceProfile",
         "iam:UntagRole",
         "iam:TagRole",
+	"iam:TagPolicy",
         "iam:ListPoliciesGrantingServiceAccess",
         "iam:ResetServiceSpecificCredential",
         "iam:ListInstanceProfileTags",
@@ -337,8 +338,7 @@ resource "aws_iam_policy" "omnistrate-bootstrap-permissions-boundary" {
         "kms:*"
       ],
       "Effect": "Allow",
-      "Resource": "*",
-      "Sid": "VisualEditor1"
+      "Resource": "*"
     },
     {
       "Sid": "S3Access",
@@ -378,8 +378,7 @@ resource "aws_iam_policy" "omnistrate-bootstrap-policy" {
         }
       },
       "Effect": "Allow",
-      "Resource": "*",
-      "Sid": "VisualEditor0"
+      "Resource": "*"
     },
     {
       "Action": [
@@ -445,14 +444,12 @@ resource "aws_iam_policy" "omnistrate-bootstrap-policy" {
         "iam:SetDefaultPolicyVersion"
       ],
       "Effect": "Allow",
-      "Resource": "*",
-      "Sid": "VisualEditor1"
+      "Resource": "*"
     },
     {
       "Action": "autoscaling:*",
       "Effect": "Allow",
-      "Resource": "*",
-      "Sid": "VisualEditor2"
+      "Resource": "*"
     },
     {
       "Sid": "S3Access",
@@ -478,32 +475,48 @@ resource "aws_iam_policy" "omnistrate-infrastructure-provisioning-policy" {
   policy = <<POLICY
 {
   "Statement": [
-    {
-      "Action": [
-        "iam:GetRole",
-        "iam:PassRole",
-        "iam:ListAttachedRolePolicies"
-      ],
-      "Effect": "Allow",
-      "Resource": [
-        "arn:aws:iam::*:role/ows-ec2-node-group-role",
-        "arn:aws:iam::*:role/omnistrate-eks-iam-role",
-        "arn:aws:iam::*:role/omnistrate-ec2-node-group-iam-role",
-        "arn:aws:iam::*:role/aws-service-role/eks-nodegroup.amazonaws.com/AWSServiceRoleForAmazonEKSNodegroup"
-      ],
-      "Sid": "VisualEditor0"
-    },
-    {
-      "Action": [
-        "s3:*",
-        "ec2:*",
-        "elasticloadbalancing:*",
-        "eks:*"
-      ],
-      "Effect": "Allow",
-      "Resource": "*",
-      "Sid": "VisualEditor1"
-    }
+	{
+	    "Action": [
+		"iam:Get*",
+		"iam:List*"
+	    ],
+	    "Effect": "Allow",
+	    "Resource": "*"
+	},
+	{
+	    "Action": [
+		"iam:GetRole",
+		"iam:PassRole",
+		"iam:ListAttachedRolePolicies"
+	    ],
+	    "Effect": "Allow",
+	    "Resource": [
+	        "arn:aws:iam::*:role/ows-ec2-node-group-role",
+	        "arn:aws:iam::*:role/omnistrate-eks-iam-role",
+	        "arn:aws:iam::*:role/omnistrate-ec2-node-group-iam-role",
+	        "arn:aws:iam::*:role/aws-service-role/eks-nodegroup.amazonaws.com/AWSServiceRoleForAmazonEKSNodegroup"
+	    ]
+    	},
+        {
+            "Action": [
+                "iam:*"
+            ],
+            "Effect": "Allow",
+            "Resource": [
+                "arn:aws:iam::*:role/omnistrate/*", 
+                "arn:aws:iam::*:policy/omnistrate/*"
+            ]
+        },
+	{
+	      "Action": [
+	        "s3:*",
+	        "ec2:*",
+	        "elasticloadbalancing:*",
+	        "eks:*"
+	      ],
+	      "Effect": "Allow",
+	      "Resource": "*"
+	}
   ],
   "Version": "2012-10-17"
 }
