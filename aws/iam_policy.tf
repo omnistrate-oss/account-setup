@@ -502,7 +502,8 @@ resource "aws_iam_policy" "omnistrate-infrastructure-provisioning-policy" {
             ],
             "Effect": "Allow",
             "Resource": [
-                "arn:aws:iam::*:role/omnistrate/*"
+                "arn:aws:iam::*:role/omnistrate/*", 
+                "arn:aws:iam::*:policy/omnistrate/*"
             ]
         },
 	{
