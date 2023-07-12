@@ -474,29 +474,48 @@ resource "aws_iam_policy" "omnistrate-infrastructure-provisioning-policy" {
   policy = <<POLICY
 {
   "Statement": [
-    {
-      "Action": [
-        "iam:*",
-      ],
-      "Effect": "Allow",
-      "Resource": [
-        "arn:aws:iam::*:role/ows-ec2-node-group-role",
-        "arn:aws:iam::*:role/omnistrate-eks-iam-role",
-        "arn:aws:iam::*:role/omnistrate-ec2-node-group-iam-role",
-        "arn:aws:iam::*:role/omnistrate/*",
-        "arn:aws:iam::*:role/aws-service-role/eks-nodegroup.amazonaws.com/AWSServiceRoleForAmazonEKSNodegroup"
-      ]
-    },
-    {
-      "Action": [
-        "s3:*",
-        "ec2:*",
-        "elasticloadbalancing:*",
-        "eks:*"
-      ],
-      "Effect": "Allow",
-      "Resource": "*"
-    }
+	{
+	    "Action": [
+		"iam:Get*",
+		"iam:List*"
+	    ],
+	    "Effect": "Allow",
+	    "Resource": "*"
+	},
+	{
+	    "Action": [
+		"iam:GetRole",
+		"iam:PassRole",
+		"iam:ListAttachedRolePolicies"
+	    ],
+	    "Effect": "Allow",
+	    "Resource": [
+	        "arn:aws:iam::*:role/ows-ec2-node-group-role",
+	        "arn:aws:iam::*:role/omnistrate-eks-iam-role",
+	        "arn:aws:iam::*:role/omnistrate-ec2-node-group-iam-role",
+	        "arn:aws:iam::*:role/omnistrate/*",
+	        "arn:aws:iam::*:role/aws-service-role/eks-nodegroup.amazonaws.com/AWSServiceRoleForAmazonEKSNodegroup"
+	    ]
+    	},
+        {
+            "Action": [
+                "iam:*"
+            ],
+            "Effect": "Allow",
+            "Resource": [
+                "arn:aws:iam::*:role/omnistrate/"
+            ]
+        },
+	{
+	      "Action": [
+	        "s3:*",
+	        "ec2:*",
+	        "elasticloadbalancing:*",
+	        "eks:*"
+	      ],
+	      "Effect": "Allow",
+	      "Resource": "*"
+	}
   ],
   "Version": "2012-10-17"
 }
