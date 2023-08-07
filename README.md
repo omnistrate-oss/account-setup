@@ -22,5 +22,5 @@ https://console.cloud.google.com/apis/library/container.googleapis.com?project=p
 cd gcp
 gcloud auth application-default login
 terraform init
-TF_VAR_project_id=<project-id> terraform apply
+TF_VAR_project_id=<project-id> TF_VAR_project_number=<project-number> terraform apply
 ```
