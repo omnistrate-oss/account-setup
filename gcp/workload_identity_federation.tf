@@ -27,9 +27,16 @@ resource "google_iam_workload_identity_pool_provider" "oidc_provider" {
   }
 }
 
-# service account connection with the workload identity federation
+# Omnistrate bootstrap service account connection with the workload identity federation
 resource "google_service_account_iam_member" "association" {
   service_account_id = google_service_account.omnistrate_bootstrap.id
   role               = "roles/iam.workloadIdentityUser"
   member             = "principal://iam.googleapis.com/${google_iam_workload_identity_pool.pool.name}/subject/system:serviceaccount:bootstrap:bootstrap-sa"
+}
+
+# Config connector service account connection with the workload identity
+resource "google_service_account_iam_member" "config_connector_association" {
+  service_account_id = google_service_account.config_connector_bootstrap.id
+  role               = "roles/iam.workloadIdentityUser"
+  member             = "serviceAccount:${data.google_project.current.project_id}.svc.id.goog[cnrm-system/cnrm-controller-manager]"
 }
