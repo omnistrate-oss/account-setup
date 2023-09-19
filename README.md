@@ -9,7 +9,7 @@ terraform apply
 ```
 
 ## Setup your GCP account for Omnistrate
-### Ensure the following services are enables (please replace the `project-id` with your project ID)
+### Ensure the following services are enabled (please replace the `project-id` with your project ID)
 - IAM Service Account Credentials API
 https://console.cloud.google.com/apis/library/iamcredentials.googleapis.com?project=project-id
 - Compute Engine APIs
