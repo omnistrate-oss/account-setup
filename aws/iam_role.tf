@@ -23,12 +23,12 @@ resource "aws_iam_role" "omnistrate-bootstrap-role" {
       "Action": "sts:AssumeRoleWithWebIdentity",
       "Condition": {
         "StringEquals": {
-          "oidc.eks.us-west-2.amazonaws.com/id/DDD24EA1057FF9C5F85C434C444F1B80:sub": "system:serviceaccount:bootstrap:bootstrap-sa"
+          "oidc.eks.us-west-2.amazonaws.com/id/9AEF0C846C22DEAEFDDD1F98C6AB9FEA:sub": "system:serviceaccount:bootstrap:bootstrap-sa"
         }
       },
       "Effect": "Allow",
       "Principal": {
-        "Federated": "arn:aws:iam::${data.aws_caller_identity.current.account_id}:oidc-provider/oidc.eks.us-west-2.amazonaws.com/id/DDD24EA1057FF9C5F85C434C444F1B80"
+        "Federated": "arn:aws:iam::${data.aws_caller_identity.current.account_id}:oidc-provider/oidc.eks.us-west-2.amazonaws.com/id/9AEF0C846C22DEAEFDDD1F98C6AB9FEA"
       }
     }
   ],
