@@ -337,11 +337,40 @@ resource "aws_iam_policy" "omnistrate-bootstrap-permissions-boundary" {
         "s3:*",
         "kms:*", 
         "secretsmanager:*",
-        "kafkaconnect:*"
+        "kafkaconnect:*", 
+        "logs:*"
       ],
       "Effect": "Allow",
       "Resource": "*"
     },
+    {
+      "Effect": "Allow",
+      "Action": "iam:CreateServiceLinkedRole",
+      "Resource": "arn:aws:iam::*:role/aws-service-role/kafkaconnect.amazonaws.com/AWSServiceRoleForKafkaConnect*",
+      "Condition": {
+        "StringLike": {
+          "iam:AWSServiceName": "kafkaconnect.amazonaws.com"
+        }
+      }
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "iam:AttachRolePolicy",
+        "iam:PutRolePolicy"
+      ],
+      "Resource": "arn:aws:iam::*:role/aws-service-role/kafkaconnect.amazonaws.com/AWSServiceRoleForKafkaConnect*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "iam:CreateServiceLinkedRole",
+      "Resource": "arn:aws:iam::*:role/aws-service-role/delivery.logs.amazonaws.com/AWSServiceRoleForLogDelivery*",
+      "Condition": {
+        "StringLike": {
+          "iam:AWSServiceName": "delivery.logs.amazonaws.com"
+        }
+      }
+    }
     {
       "Sid": "S3Access",
       "Effect": "Allow",
