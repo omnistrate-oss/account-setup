@@ -370,7 +370,7 @@ resource "aws_iam_policy" "omnistrate-bootstrap-permissions-boundary" {
           "iam:AWSServiceName": "delivery.logs.amazonaws.com"
         }
       }
-    }
+    },
     {
       "Sid": "S3Access",
       "Effect": "Allow",
