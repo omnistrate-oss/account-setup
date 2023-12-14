@@ -1,5 +1,5 @@
 # account-setup
-Terraform script to setup the cloud provider account to provision the dataplane in a BYOA scenario.
+Terraform script to setup the customer's cloud provider account to provision the dataplane in, required for a BYOA scenario.
 
 ## Setup your AWS account for Omnistrate
 ```bash
