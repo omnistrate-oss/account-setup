@@ -335,7 +335,8 @@ resource "aws_iam_policy" "omnistrate-bootstrap-permissions-boundary" {
         "iam:SetDefaultPolicyVersion",
         "route53:*",
         "s3:*",
-        "kms:*"
+        "kms:*", 
+        "secretsmanager:*"
       ],
       "Effect": "Allow",
       "Resource": "*"
