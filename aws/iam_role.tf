@@ -1,20 +1,5 @@
 data "aws_caller_identity" "current" {}
 
-resource "aws_iam_service_linked_role" "AWSServiceRoleForAmazonEKS" {
-  aws_service_name = "eks.amazonaws.com"
-  description      = "Allows Amazon EKS to call AWS services on your behalf."
-}
-
-resource "aws_iam_service_linked_role" "AWSServiceRoleForAmazonEKSNodegroup" {
-  aws_service_name = "eks-nodegroup.amazonaws.com"
-  description      = "This policy allows Amazon EKS to create and manage Nodegroups"
-}
-
-resource "aws_iam_service_linked_role" "AWSServiceRoleForAutoScaling" {
-  aws_service_name = "autoscaling.amazonaws.com"
-  description      = "Default Service-Linked Role enables access to AWS Services and Resources used or managed by Auto Scaling"
-}
-
 resource "aws_iam_role" "omnistrate-bootstrap-role" {
   assume_role_policy = <<POLICY
 {

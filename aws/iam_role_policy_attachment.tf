@@ -1,18 +1,3 @@
-# resource "aws_iam_role_policy_attachment" "AWSServiceRoleForAmazonEKSNodegroup_AWSServiceRoleForAmazonEKSNodegroup" {
-#   policy_arn = "arn:aws:iam::aws:policy/aws-service-role/AWSServiceRoleForAmazonEKSNodegroup"
-#   role       = "AWSServiceRoleForAmazonEKSNodegroup"
-# }
-
-# resource "aws_iam_role_policy_attachment" "AWSServiceRoleForAmazonEKS_AmazonEKSServiceRolePolicy" {
-#   policy_arn = "arn:aws:iam::aws:policy/aws-service-role/AmazonEKSServiceRolePolicy"
-#   role       = "AWSServiceRoleForAmazonEKS"
-# }
-
-# resource "aws_iam_role_policy_attachment" "AWSServiceRoleForAutoScaling_AutoScalingServiceRolePolicy" {
-#   policy_arn = "arn:aws:iam::aws:policy/aws-service-role/AutoScalingServiceRolePolicy"
-#   role       = "AWSServiceRoleForAutoScaling"
-# }
-
 resource "aws_iam_role_policy_attachment" "omnistrate-bootstrap-role_omnistrate-bootstrap-policy" {
   policy_arn = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:policy/omnistrate-bootstrap-policy"
   role       = "omnistrate-bootstrap-role"
