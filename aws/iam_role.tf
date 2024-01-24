@@ -1,6 +1,6 @@
 data "aws_caller_identity" "current" {}
 
-variable "session_name_suffix" {
+variable "account_config_identity_id" {
   description = "Suffix for the session name in IAM trust policy unique to your account configuration. Equivalent to sts:ExternalId"
   type        = string
 }
@@ -14,7 +14,7 @@ resource "aws_iam_role" "omnistrate-bootstrap-role" {
       "Condition": {
         "StringEquals": {
           "oidc.eks.us-west-2.amazonaws.com/id/9AEF0C846C22DEAEFDDD1F98C6AB9FEA:sub": "system:serviceaccount:bootstrap:bootstrap-sa",
-          "sts:RoleSessionName": "bootstrap-session-${var.session_name_suffix}"
+          "sts:RoleSessionName": "bootstrap-session-${var.account_config_identity_id}"
         }
       },
       "Effect": "Allow",
