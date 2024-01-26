@@ -16,6 +16,11 @@ variable "project_number" {
   default     = ""
 }
 
+variable "account_config_identity_id" {
+  description = "Suffix for the session name in IAM trust policy unique to your account configuration. Equivalent to sts:ExternalId"
+  type        = string
+}
+
 # Fetch the project ID dynamically
 data "google_project" "current" {
     project_id = var.project_id
@@ -24,7 +29,7 @@ data "google_project" "current" {
 # Omnistrate bootstrap service account
 resource "google_service_account" "omnistrate_bootstrap" {
   project = data.google_project.current.project_id
-  account_id   = "omnistrate-bootstrap"
+  account_id   = "omnistrate-bootstrap-${var.account_config_identity_id}"
   display_name = "Omnistrate Bootstrap Service Account"
 }
 

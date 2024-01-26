@@ -1,11 +1,12 @@
 # account-setup
-Terraform script to setup the customer's cloud provider account to provision the dataplane in, required for a BYOA scenario.
+Terraform script to setup your account to provision your services
 
 ## Setup your AWS account for Omnistrate
+### Please replace the `suffix-from-platform` with the ID shown on the create account config screen
 ```bash
 cd aws
 terraform init
-terraform apply
+TF_VAR_account_config_identity_id=<suffix-from-platform> terraform apply
 ```
 
 ## Setup your GCP account for Omnistrate
@@ -23,7 +24,7 @@ then run the following commands:
 cd gcp
 gcloud auth application-default login
 terraform init
-TF_VAR_project_id=<project-id> TF_VAR_project_number=<project-number> terraform apply
+TF_VAR_project_id=<project-id> TF_VAR_project_number=<project-number> TF_VAR_account_config_identity_id=<suffix-from-platform> terraform apply
 ```
 
 ## Setup in one line
