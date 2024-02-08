@@ -1,6 +1,11 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Description: 'Omnistrate CloudFormation template including OIDC provider, IAM policies, roles, and EKS node group describe policy.'
 
+Parameters:
+  AccountConfigIdentityId:
+    Description: Suffix for the session name in IAM trust policy unique to your account configuration. Equivalent to sts:ExternalId
+    Type: String
+
 Resources:
   OIDCProvider:
     Type: AWS::IAM::OIDCProvider
@@ -82,8 +87,8 @@ Resources:
           - Action:
               - 'ec2:CreateTags'
             Condition:
-              Null:
-                aws:RequestTag/elbv2.k8s.aws/cluster: 'false'
+              'Null':
+                'aws:RequestTag/elbv2.k8s.aws/cluster': 'false'
               StringEquals:
                 ec2:CreateAction: 'CreateSecurityGroup'
             Effect: Allow
@@ -92,9 +97,9 @@ Resources:
               - 'ec2:CreateTags'
               - 'ec2:DeleteTags'
             Condition:
-              Null:
-                aws:RequestTag/elbv2.k8s.aws/cluster: 'true'
-                aws:ResourceTag/elbv2.k8s.aws/cluster: 'false'
+              'Null':
+                'aws:RequestTag/elbv2.k8s.aws/cluster': 'true'
+                'aws:ResourceTag/elbv2.k8s.aws/cluster': 'false'
             Effect: Allow
             Resource: arn:aws:ec2:*:*:security-group/*
           - Action:
@@ -102,16 +107,16 @@ Resources:
               - 'ec2:RevokeSecurityGroupIngress'
               - 'ec2:DeleteSecurityGroup'
             Condition:
-              Null:
-                aws:ResourceTag/elbv2.k8s.aws/cluster: 'false'
+              'Null':
+                'aws:ResourceTag/elbv2.k8s.aws/cluster': 'false'
             Effect: Allow
             Resource: '*'
           - Action:
               - 'elasticloadbalancing:CreateLoadBalancer'
               - 'elasticloadbalancing:CreateTargetGroup'
             Condition:
-              Null:
-                aws:RequestTag/elbv2.k8s.aws/cluster: 'false'
+              'Null':
+                'aws:RequestTag/elbv2.k8s.aws/cluster': 'false'
             Effect: Allow
             Resource: '*'
           - Action:
@@ -125,9 +130,9 @@ Resources:
               - 'elasticloadbalancing:AddTags'
               - 'elasticloadbalancing:RemoveTags'
             Condition:
-              Null:
-                aws:RequestTag/elbv2.k8s.aws/cluster: 'true'
-                aws:ResourceTag/elbv2.k8s.aws/cluster: 'false'
+              'Null':
+                'aws:RequestTag/elbv2.k8s.aws/cluster': 'true'
+                'aws:ResourceTag/elbv2.k8s.aws/cluster': 'false'
             Effect: Allow
             Resource:
               - 'arn:aws:elasticloadbalancing:*:*:targetgroup/*/*'
@@ -136,8 +141,8 @@ Resources:
           - Action:
               - 'elasticloadbalancing:AddTags'
             Condition:
-              Null:
-                aws:RequestTag/elbv2.k8s.aws/cluster: 'false'
+              'Null':
+                'aws:RequestTag/elbv2.k8s.aws/cluster': 'false'
               StringEquals:
                 elasticloadbalancing:CreateAction:
                   - 'CreateTargetGroup'
@@ -157,8 +162,8 @@ Resources:
               - 'elasticloadbalancing:ModifyTargetGroupAttributes'
               - 'elasticloadbalancing:DeleteTargetGroup'
             Condition:
-              Null:
-                aws:ResourceTag/elbv2.k8s.aws/cluster: 'false'
+              'Null':
+                'aws:ResourceTag/elbv2.k8s.aws/cluster': 'false'
             Effect: Allow
             Resource: '*'
           - Action:
@@ -174,7 +179,7 @@ Resources:
               - 'elasticloadbalancing:ModifyRule'
             Effect: Allow
             Resource: '*'
-  omnistrate-bootstrap-permissions-boundary:
+  OmnistrateBootstrapPermissionsBoundary:
     Type: AWS::IAM::Policy
     Properties:
       PolicyName: omnistrate-bootstrap-permissions-boundary
@@ -263,7 +268,7 @@ Resources:
             Resource:
               - Fn::Sub: 'arn:aws:s3:::omnistrate-${AWS::AccountId}-dp-pulumi'
               - Fn::Sub: 'arn:aws:s3:::omnistrate-${AWS::AccountId}-dp-pulumi/*'
-  omnistrate-bootstrap-policy:
+  OmnistrateBootstrapPolicy:
     Type: AWS::IAM::Policy
     Properties:
       PolicyName: omnistrate-bootstrap-policy
@@ -354,7 +359,7 @@ Resources:
             Resource:
               - Fn::Sub: 'arn:aws:s3:::omnistrate-${AWS::AccountId}-dp-pulumi'
               - Fn::Sub: 'arn:aws:s3:::omnistrate-${AWS::AccountId}-dp-pulumi/*'
-  omnistrate-infrastructure-provisioning-policy:
+  OmnistrateInfrastructureProvisioningPolicy:
     Type: AWS::IAM::Policy
     Properties:
       PolicyName: omnistrate-infrastructure-provisioning-policy
@@ -403,7 +408,7 @@ Resources:
             Condition:
               StringEquals:
                 "oidc.eks.us-west-2.amazonaws.com/id/9AEF0C846C22DEAEFDDD1F98C6AB9FEA:sub": "system:serviceaccount:bootstrap:bootstrap-sa"
-                "sts:RoleSessionName": !Sub "bootstrap-session-${account_config_identity_id}"
+                "sts:RoleSessionName": !Sub "bootstrap-session-${AccountConfigIdentityId}"
       ManagedPolicyArns:
         - !Sub "arn:aws:iam::${AWS::AccountId}:policy/omnistrate-bootstrap-policy"
       MaxSessionDuration: 3600
