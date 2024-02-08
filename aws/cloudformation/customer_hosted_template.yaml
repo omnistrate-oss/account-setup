@@ -475,13 +475,6 @@ Resources:
       Roles:
         - Ref: OmnistrateEC2NodeGroupIAMRole
 
-  OmnistrateEC2NodeGroupIAMRolePolicyAttachment:
-    Type: AWS::IAM::PolicyAttachment
-    Properties:
-      PolicyArn: "arn:aws:iam::${AWS::AccountId}:policy/omnistrate-bootstrap-policy"
-      Roles:
-        - Ref: OmnistrateEC2NodeGroupIAMRole
-
 Outputs:
   BootstrapRole:
     Value: !GetAtt OmnistrateBootstrapRole.Arn
