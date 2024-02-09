@@ -472,7 +472,6 @@ Resources:
           - Action: "eks:DescribeNodegroup"
             Effect: Allow
             Resource: "*"
-            Sid: "VisualEditor0"
       Roles:
         - Ref: OmnistrateEC2NodeGroupIAMRole
 
