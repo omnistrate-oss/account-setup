@@ -259,8 +259,35 @@ Resources:
               - 'iam:DeletePolicyVersion'
               - 'iam:TagInstanceProfile'
               - 'iam:SetDefaultPolicyVersion'
+              - 'route53:*'
+              - 's3:*'
+              - 'secretsmanager:*'
+              - 'kafkaconnect:*'
+              - 'logs:*'
             Effect: Allow
             Resource: '*'
+          - Action:
+              - 'iam:CreateServiceLinkedRole'
+            Effect: Allow
+            Resource:
+              - 'arn:aws:iam::*:role/aws-service-role/kafkaconnect.amazonaws.com/AWSServiceRoleForKafkaConnect*'
+            Condition:
+              StringLike:
+                'iam:AWSServiceName': 'kafkaconnect.amazonaws.com'
+          - Action:
+              - 'iam:AttachRolePolicy'
+              - 'iam:PutRolePolicy'
+            Effect: Allow
+            Resource:
+              - 'arn:aws:iam::*:role/aws-service-role/kafkaconnect.amazonaws.com/AWSServiceRoleForKafkaConnect*'
+          - Action:
+              - 'iam:CreateServiceLinkedRole'
+            Effect: Allow
+            Resource:
+              - 'arn:aws:iam::*:role/aws-service-role/delivery.logs.amazonaws.com/AWSServiceRoleForLogDelivery*'
+            Condition:
+              StringLike:
+                'iam:AWSServiceName': 'delivery.logs.amazonaws.com'
           - Sid: 'S3Access'
             Effect: Allow
             Action:
