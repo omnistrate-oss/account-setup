@@ -11,14 +11,14 @@ Resources:
     Type: AWS::IAM::OIDCProvider
     Properties:
       Url: https://oidc.eks.us-west-2.amazonaws.com/id/9AEF0C846C22DEAEFDDD1F98C6AB9FEA
-      ClientIDList:
+      ClientIdList:
         - sts.amazonaws.com
       ThumbprintList:
         - 9e99a48a9960b14926bb7f3b02e22da2b0ab7280
   AWSLoadBalancerControllerIAMPolicy:
-    Type: AWS::IAM::Policy
+    Type: AWS::IAM::ManagedPolicy
     Properties:
-      PolicyName: AWSLoadBalancerControllerIAMPolicy
+      ManagedPolicyName: AWSLoadBalancerControllerIAMPolicy
       PolicyDocument:
         Version: '2012-10-17'
         Statement:
@@ -180,9 +180,9 @@ Resources:
             Effect: Allow
             Resource: '*'
   OmnistrateBootstrapPermissionsBoundary:
-    Type: AWS::IAM::Policy
+    Type: AWS::IAM::ManagedPolicy
     Properties:
-      PolicyName: omnistrate-bootstrap-permissions-boundary
+      ManagedPolicyName: omnistrate-bootstrap-permissions-boundary
       PolicyDocument:
         Version: '2012-10-17'
         Statement:
@@ -269,24 +269,26 @@ Resources:
               - Fn::Sub: 'arn:aws:s3:::omnistrate-${AWS::AccountId}-dp-pulumi'
               - Fn::Sub: 'arn:aws:s3:::omnistrate-${AWS::AccountId}-dp-pulumi/*'
   OmnistrateBootstrapPolicy:
-    Type: AWS::IAM::Policy
+    Type: AWS::IAM::ManagedPolicy
     Properties:
-      PolicyName: omnistrate-bootstrap-policy
+      ManagedPolicyName: omnistrate-bootstrap-policy
+      Path: "/"
       PolicyDocument:
         Version: '2012-10-17'
         Statement:
-          - Action:
+          - Effect: Allow
+            Action:
               - 'iam:DetachRolePolicy'
               - 'iam:DeleteRolePolicy'
               - 'iam:CreateRole'
               - 'iam:AttachRolePolicy'
               - 'iam:PutRolePolicy'
+            Resource: '*'
             Condition:
               ForAnyValue:StringLike:
                 'iam:PermissionsBoundary': 'arn:aws:iam::*:policy/omnistrate-bootstrap-permissions-boundary'
-            Effect: Allow
-            Resource: '*'
-          - Action:
+          - Effect: Allow
+            Action:
               - 'iam:UpdateAssumeRolePolicy'
               - 'iam:GetPolicyVersion'
               - 'iam:CreateServiceSpecificCredential'
@@ -348,21 +350,20 @@ Resources:
               - 'iam:DeletePolicyVersion'
               - 'iam:TagInstanceProfile'
               - 'iam:SetDefaultPolicyVersion'
-          - Action:
-              - 'autoscaling:*'
-            Effect: Allow
+            Resource: '*'
+          - Effect: Allow
+            Action: 'autoscaling:*'
             Resource: '*'
           - Sid: 'S3Access'
             Effect: Allow
-            Action:
-              - 's3:*'
+            Action: 's3:*'
             Resource:
-              - Fn::Sub: 'arn:aws:s3:::omnistrate-${AWS::AccountId}-dp-pulumi'
-              - Fn::Sub: 'arn:aws:s3:::omnistrate-${AWS::AccountId}-dp-pulumi/*'
+              - !Sub 'arn:aws:s3:::omnistrate-${AWS::AccountId}-dp-pulumi'
+              - !Sub 'arn:aws:s3:::omnistrate-${AWS::AccountId}-dp-pulumi/*'
   OmnistrateInfrastructureProvisioningPolicy:
-    Type: AWS::IAM::Policy
+    Type: AWS::IAM::ManagedPolicy
     Properties:
-      PolicyName: omnistrate-infrastructure-provisioning-policy
+      ManagedPolicyName: omnistrate-infrastructure-provisioning-policy
       PolicyDocument:
         Version: '2012-10-17'
         Statement:
