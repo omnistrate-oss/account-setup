@@ -338,7 +338,8 @@ resource "aws_iam_policy" "omnistrate-bootstrap-permissions-boundary" {
         "kms:*", 
         "secretsmanager:*",
         "kafkaconnect:*", 
-        "logs:*"
+        "logs:*", 
+	"cloudwatch:*"
       ],
       "Effect": "Allow",
       "Resource": "*"
