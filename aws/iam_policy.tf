@@ -339,10 +339,23 @@ resource "aws_iam_policy" "omnistrate-bootstrap-permissions-boundary" {
         "secretsmanager:*",
         "kafkaconnect:*", 
         "logs:*", 
-	"cloudwatch:*"
+	    "cloudwatch:*",
+	    "elasticfilesystem:*",
+        "kms:DescribeKey",
+        "kms:ListAliases"
       ],
       "Effect": "Allow",
       "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "iam:CreateServiceLinkedRole",
+      "Resource": "*",
+      "Condition": {
+        "StringLike": {
+          "iam:AWSServiceName": "elasticfilesystem.amazonaws.com"
+        }
+      }
     },
     {
       "Effect": "Allow",
