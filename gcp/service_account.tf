@@ -84,9 +84,9 @@ resource "google_project_iam_member" "cc_kubernetes_admin" {
     member = "serviceAccount:${google_service_account.config_connector_bootstrap.email}"
 }
 
-resource "google_project_iam_member" "cc_service_account_user" {
+resource "google_project_iam_member" "cc_service_account_admin" {
     project = data.google_project.current.project_id
-    role   = "roles/iam.serviceAccountUser"
+    role   = "roles/iam.serviceAccountAdmin"
     member = "serviceAccount:${google_service_account.config_connector_bootstrap.email}"
 }
 
