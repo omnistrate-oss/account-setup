@@ -49,5 +49,5 @@ resource "google_service_account_iam_member" "config_connector_association" {
 resource "google_service_account_iam_member" "dataplane_service_association" {
   service_account_id = google_service_account.omnistrate_dataplane_agent.id
   role               = "roles/iam.workloadIdentityUser"
-  member             = "serviceAccount:${data.google_project.current.project_id}.svc.id.goog[dataplane-agent/omnistrate-da-${var.account_config_identity_id}]"
+  member             = "serviceAccount:${data.google_project.current.project_id}.svc.id.goog[dataplane-agent/omnistrate-da-${lower(var.account_config_identity_id)}]"
 }

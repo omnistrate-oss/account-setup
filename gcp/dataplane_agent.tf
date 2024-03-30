@@ -1,9 +1,9 @@
 # Omnistrate dataplane agent service account
 resource "google_service_account" "omnistrate_dataplane_agent" {
   project = data.google_project.current.project_id
-  account_id   = "omnistrate-da-${var.account_config_identity_id}"
-  display_name = "omnistrate-da-${var.account_config_identity_id}"
-  description = "Omnistrate Dataplane Agent Service Account for account ${var.account_config_identity_id}"
+  account_id   = "omnistrate-da-${lower(var.account_config_identity_id)}"
+  display_name = "omnistrate-da-${lower(var.account_config_identity_id)}"
+  description = "Omnistrate Dataplane Agent Service Account for account ${lower(var.account_config_identity_id)}"
 }
 
 # Permissions for dataplane agent service account
