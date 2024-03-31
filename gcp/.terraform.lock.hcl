@@ -1,19 +1,21 @@
-# This file is maintained automatically by "tofu init".
+# This file is maintained automatically by "terraform init".
 # Manual edits may be lost in future updates.
 
-provider "registry.opentofu.org/hashicorp/google" {
-  version = "5.21.0"
+provider "registry.terraform.io/hashicorp/google" {
+  version = "5.22.0"
   hashes = [
-    "h1:NRSLgR4Zz3QKD0ZEFphs+deEaQPe+ocvyKvB7t3zLUg=",
-    "zh:1d43bf3e247fe4265ffbc1c5452c66adc2566fc75ee4f500602b182ffedcbae4",
-    "zh:5b0800b7e7c69fbd5128adc34ef537b168e46c4aa8f977679bc5628418a8f93d",
-    "zh:5fc9289835d00350dd328009661f9b1b9a7de3d15d1f559f51957ce54fcefa6c",
-    "zh:8ff8981cae62342988d8cc1e0889de7987956b8ae57466ba6a68037711584a04",
-    "zh:a3b5d625bedab2e91446f09a5f7491e44e389afbefa2a80af4841871687b80b7",
-    "zh:aa88e0afe7a28438d97a51bce0a10460d24064a2d9d9f1185e00b3774a523fb0",
-    "zh:af881c3537687658b5be02bc2e2f272865a3d54a7f4170b46d537be655bdea62",
-    "zh:e8b976fa6fa070582eef61f23cd7f2a84247c8fe39861cb5ae59a7217d369851",
-    "zh:f7da2d1c220bd6177704cb76176859e6e655633e793ddbf004589cb832e90079",
-    "zh:fb3f9dc66a0a281b08935b29d83c8c7a4636aa8ae1bdba01901dd5a57ba6c3d6",
+    "h1:u9exg8XQZgVN7qgMm1UGNiRpzaeEp+Ui7FWdgZUfdxE=",
+    "zh:12fce1e8b7d4cfb150142185ce99165ca3854526f7d826106ec09ba77ef9bab1",
+    "zh:1ecaff54cf7fecc41d89b130a066e903fd1353a1a476c816ad2b2013b1664776",
+    "zh:294091d1d0b87b99f9bdfdd42eae769fa44930680a3cefff0ff2f43741fefa53",
+    "zh:373e7a4127c7fef671a226764bb5f5ebc94823b19f65d8e2370b4c75e43eb2b3",
+    "zh:7121c14b7a59b07386d09e9ca19160a453680c32708f1132e904d56f8c697a65",
+    "zh:7d8316fec69a284dae43b3f107798e62478b8d1de9b3197e45b49e99b14bfc27",
+    "zh:8186df47dcbf112dfd54e3310056a955c422277ccbe369f6074f8c65ecb724dc",
+    "zh:967dc4f14fb1ad1673befd3e40a181a0bf18cb212822cab1dc9f8b44235fc766",
+    "zh:9dac1ec8aa80c49189e2dd59ce338c14330da685782fcb261e62c2b2d1b90e26",
+    "zh:c309f86d35945c02ed2fdb71348cd03fc99a6aaeedfad035b01bad78222e3eda",
+    "zh:eb46d32b5fa33d8fa7e2cded4ea5b815d66a202754a7afc8ad7c93aa08d13919",
+    "zh:f569b65999264a9416862bca5cd2a6177d94ccb0424f3a4ef424428912b9cb3c",
   ]
 }
