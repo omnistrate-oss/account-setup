@@ -30,3 +30,9 @@ resource "google_project_iam_member" "service_account_user_for_dataplane" {
   role   = "roles/iam.serviceAccountUser"
   member = "serviceAccount:${google_service_account.omnistrate_dataplane_agent.email}"
 }
+
+resource "google_project_iam_member" "service_account_manager_for_dataplane" {
+  project = data.google_project.current.project_id
+  role   = "roles/composer.ServiceAgentV2Ext"
+  member = "serviceAccount:${google_service_account.omnistrate_dataplane_agent.email}"
+}
