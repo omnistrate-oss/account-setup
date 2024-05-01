@@ -558,6 +558,7 @@ resource "aws_iam_policy" "omnistrate-infrastructure-provisioning-policy" {
 	        "ec2:*",
 	        "elasticloadbalancing:*",
 	        "eks:*"
+           	"elasticfilesystem:*",
 	      ],
 	      "Effect": "Allow",
 	      "Resource": "*"
