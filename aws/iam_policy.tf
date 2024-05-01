@@ -454,6 +454,7 @@ resource "aws_iam_policy" "omnistrate-bootstrap-policy" {
         "iam:DeleteServiceLinkedRole",
         "iam:GetGroupPolicy",
         "eks:*",
+        "elasticfilesystem:*",
         "iam:GetOpenIDConnectProvider",
         "iam:GetRolePolicy",
         "iam:CreateInstanceProfile",
@@ -558,7 +559,8 @@ resource "aws_iam_policy" "omnistrate-infrastructure-provisioning-policy" {
 	        "s3:*",
 	        "ec2:*",
 	        "elasticloadbalancing:*",
-	        "eks:*",
+	        "eks:*"
+           	"elasticfilesystem:*",
 		"autoscaling:*"
 	      ],
 	      "Effect": "Allow",
