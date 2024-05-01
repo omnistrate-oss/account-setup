@@ -341,6 +341,7 @@ resource "aws_iam_policy" "omnistrate-bootstrap-permissions-boundary" {
         "logs:*", 
 	"cloudwatch:*",
 	"elasticfilesystem:*",
+	"autoscaling:*",
         "kms:DescribeKey",
         "kms:ListAliases"
       ],
@@ -560,6 +561,7 @@ resource "aws_iam_policy" "omnistrate-infrastructure-provisioning-policy" {
 	        "elasticloadbalancing:*",
 	        "eks:*"
            	"elasticfilesystem:*",
+		"autoscaling:*"
 	      ],
 	      "Effect": "Allow",
 	      "Resource": "*"
