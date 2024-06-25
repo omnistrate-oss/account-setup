@@ -291,7 +291,7 @@ resource "aws_iam_policy" "omnistrate-bootstrap-permissions-boundary" {
         "iam:RemoveClientIDFromOpenIDConnectProvider",
         "iam:ListEntitiesForPolicy",
         "iam:DeleteRole",
-	"iam:DeletePolicy",
+        "iam:DeletePolicy",
         "iam:UpdateRoleDescription",
         "iam:GetUserPolicy",
         "iam:ListGroupsForUser",
@@ -304,7 +304,7 @@ resource "aws_iam_policy" "omnistrate-bootstrap-permissions-boundary" {
         "iam:CreateInstanceProfile",
         "iam:UntagRole",
         "iam:TagRole",
-	"iam:TagPolicy",
+        "iam:TagPolicy",
         "iam:ListPoliciesGrantingServiceAccess",
         "iam:ResetServiceSpecificCredential",
         "iam:ListInstanceProfileTags",
@@ -335,67 +335,69 @@ resource "aws_iam_policy" "omnistrate-bootstrap-permissions-boundary" {
         "iam:SetDefaultPolicyVersion",
         "route53:*",
         "s3:*",
-        "kms:*", 
+        "kms:*",
         "secretsmanager:*",
-        "kafkaconnect:*", 
-        "logs:*", 
-	"cloudwatch:*",
-	"elasticfilesystem:*",
-	"autoscaling:*",
+        "kafkaconnect:*",
+        "logs:*",
+        "cloudwatch:*",
+        "elasticfilesystem:*",
+        "autoscaling:*",
         "kms:DescribeKey",
-        "kms:ListAliases"
+        "kms:ListAliases",
+        "lambda:*",
+        "sqs:*"
       ],
       "Effect": "Allow",
       "Resource": "*"
     },
     {
-      "Effect": "Allow",
       "Action": "iam:CreateServiceLinkedRole",
-      "Resource": "*",
       "Condition": {
         "StringLike": {
           "iam:AWSServiceName": "elasticfilesystem.amazonaws.com"
         }
-      }
+      },
+      "Effect": "Allow",
+      "Resource": "*"
     },
     {
-      "Effect": "Allow",
       "Action": "iam:CreateServiceLinkedRole",
-      "Resource": "arn:aws:iam::*:role/aws-service-role/kafkaconnect.amazonaws.com/AWSServiceRoleForKafkaConnect*",
       "Condition": {
         "StringLike": {
           "iam:AWSServiceName": "kafkaconnect.amazonaws.com"
         }
-      }
+      },
+      "Effect": "Allow",
+      "Resource": "arn:aws:iam::*:role/aws-service-role/kafkaconnect.amazonaws.com/AWSServiceRoleForKafkaConnect*"
     },
     {
-      "Effect": "Allow",
       "Action": [
         "iam:AttachRolePolicy",
         "iam:PutRolePolicy"
       ],
+      "Effect": "Allow",
       "Resource": "arn:aws:iam::*:role/aws-service-role/kafkaconnect.amazonaws.com/AWSServiceRoleForKafkaConnect*"
     },
     {
-      "Effect": "Allow",
       "Action": "iam:CreateServiceLinkedRole",
-      "Resource": "arn:aws:iam::*:role/aws-service-role/delivery.logs.amazonaws.com/AWSServiceRoleForLogDelivery*",
       "Condition": {
         "StringLike": {
           "iam:AWSServiceName": "delivery.logs.amazonaws.com"
         }
-      }
+      },
+      "Effect": "Allow",
+      "Resource": "arn:aws:iam::*:role/aws-service-role/delivery.logs.amazonaws.com/AWSServiceRoleForLogDelivery*"
     },
     {
-      "Sid": "S3Access",
-      "Effect": "Allow",
       "Action": [
-          "s3:*"
+        "s3:*"
       ],
+      "Effect": "Allow",
       "Resource": [
-          "arn:aws:s3:::omnistrate-${data.aws_caller_identity.current.account_id}-dp-pulumi",
-          "arn:aws:s3:::omnistrate-${data.aws_caller_identity.current.account_id}-dp-pulumi/*"
-      ]
+        "arn:aws:s3:::omnistrate-${data.aws_caller_identity.current.account_id}-dp-pulumi",
+        "arn:aws:s3:::omnistrate-${data.aws_caller_identity.current.account_id}-dp-pulumi/*"
+      ],
+      "Sid": "S3Access"
     }
   ],
   "Version": "2012-10-17"
@@ -499,15 +501,15 @@ resource "aws_iam_policy" "omnistrate-bootstrap-policy" {
       "Resource": "*"
     },
     {
-      "Sid": "S3Access",
-      "Effect": "Allow",
       "Action": [
         "s3:*"
       ],
+      "Effect": "Allow",
       "Resource": [
-          "arn:aws:s3:::omnistrate-${data.aws_caller_identity.current.account_id}-dp-pulumi",
-          "arn:aws:s3:::omnistrate-${data.aws_caller_identity.current.account_id}-dp-pulumi/*"
-      ]
+        "arn:aws:s3:::omnistrate-${data.aws_caller_identity.current.account_id}-dp-pulumi",
+        "arn:aws:s3:::omnistrate-${data.aws_caller_identity.current.account_id}-dp-pulumi/*"
+      ],
+      "Sid": "S3Access"
     }
   ],
   "Version": "2012-10-17"
@@ -522,50 +524,50 @@ resource "aws_iam_policy" "omnistrate-infrastructure-provisioning-policy" {
   policy = <<POLICY
 {
   "Statement": [
-	{
-	    "Action": [
-		"iam:Get*",
-		"iam:List*"
-	    ],
-	    "Effect": "Allow",
-	    "Resource": "*"
-	},
-	{
-	    "Action": [
-		"iam:GetRole",
-		"iam:PassRole",
-		"iam:ListAttachedRolePolicies"
-	    ],
-	    "Effect": "Allow",
-	    "Resource": [
-	        "arn:aws:iam::*:role/ows-ec2-node-group-role",
-	        "arn:aws:iam::*:role/omnistrate-eks-iam-role",
-	        "arn:aws:iam::*:role/omnistrate-ec2-node-group-iam-role",
-	        "arn:aws:iam::*:role/aws-service-role/eks-nodegroup.amazonaws.com/AWSServiceRoleForAmazonEKSNodegroup"
-	    ]
-    	},
-        {
-            "Action": [
-                "iam:*"
-            ],
-            "Effect": "Allow",
-            "Resource": [
-                "arn:aws:iam::*:role/omnistrate/*", 
-                "arn:aws:iam::*:policy/omnistrate/*"
-            ]
-        },
-	{
-	      "Action": [
-	        "s3:*",
-	        "ec2:*",
-	        "elasticloadbalancing:*",
-	        "eks:*",
-           	"elasticfilesystem:*",
-		"autoscaling:*"
-	      ],
-	      "Effect": "Allow",
-	      "Resource": "*"
-	}
+    {
+      "Action": [
+        "iam:Get*",
+        "iam:List*"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    },
+    {
+      "Action": [
+        "iam:GetRole",
+        "iam:PassRole",
+        "iam:ListAttachedRolePolicies"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+        "arn:aws:iam::*:role/ows-ec2-node-group-role",
+        "arn:aws:iam::*:role/omnistrate-eks-iam-role",
+        "arn:aws:iam::*:role/omnistrate-ec2-node-group-iam-role",
+        "arn:aws:iam::*:role/aws-service-role/eks-nodegroup.amazonaws.com/AWSServiceRoleForAmazonEKSNodegroup"
+      ]
+    },
+    {
+      "Action": [
+        "iam:*"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+        "arn:aws:iam::*:role/omnistrate/*",
+        "arn:aws:iam::*:policy/omnistrate/*"
+      ]
+    },
+    {
+      "Action": [
+        "s3:*",
+        "ec2:*",
+        "elasticloadbalancing:*",
+        "eks:*",
+        "elasticfilesystem:*",
+        "autoscaling:*"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
   ],
   "Version": "2012-10-17"
 }
