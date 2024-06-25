@@ -1,8 +1,8 @@
 # Omnistrate service account (principal used for service instances)
 resource "google_service_account" "omnistrate_service" {
   project = data.google_project.current.project_id
-  account_id   = "omni-btstrp-org-q9h5kjuc0n"
-  display_name = "Omnistrate Bootstrap Service Account"
+  account_id   = "omnistrate-${lower(var.account_config_identity_id)}"
+  display_name = "omnistrate-${lower(var.account_config_identity_id)}"
   description = "Omnistrate Service Account for account ${lower(var.account_config_identity_id)}"
 }
 
