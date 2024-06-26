@@ -315,6 +315,10 @@ resource "aws_iam_policy" "omnistrate-bootstrap-permissions-boundary" {
         "iam:DeleteInstanceProfile",
         "iam:GetInstanceProfile",
         "iam:ListRoles",
+        "iam:CreateRole",
+        "iam:DeleteRole",
+        "iam:DeleteRolePolicy",
+        "iam:PutRolePolicy",
         "elasticloadbalancing:*",
         "iam:ListUserPolicies",
         "iam:ListInstanceProfiles",
@@ -345,7 +349,13 @@ resource "aws_iam_policy" "omnistrate-bootstrap-permissions-boundary" {
         "kms:DescribeKey",
         "kms:ListAliases",
         "lambda:*",
-        "sqs:*"
+        "sqs:*",
+        "cloudformation:Describe*",
+        "cloudformation:List*",
+        "cloudformation:CreateChangeSet",
+        "cloudformation:ExecuteChangeSet",
+        "cloudformation:ValidateTemplate",
+        "cloudformation:DeleteChangeSet"
       ],
       "Effect": "Allow",
       "Resource": "*"
