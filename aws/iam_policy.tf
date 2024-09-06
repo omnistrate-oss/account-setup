@@ -361,6 +361,20 @@ resource "aws_iam_policy" "omnistrate-bootstrap-permissions-boundary" {
       "Resource": "*"
     },
     {
+      "Action": [
+        "cognito-idp:DescribeUserPoolClient",
+        "acm:ListCertificates",
+        "acm:DescribeCertificate",
+        "iam:ListServerCertificates",
+        "iam:GetServerCertificate",
+        "waf-regional:*",
+        "wafv2:*",
+        "shield:*"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    },
+    {
       "Action": "iam:CreateServiceLinkedRole",
       "Condition": {
         "StringLike": {
