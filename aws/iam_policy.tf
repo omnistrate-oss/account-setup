@@ -367,18 +367,9 @@ resource "aws_iam_policy" "omnistrate-bootstrap-permissions-boundary" {
         "acm:DescribeCertificate",
         "iam:ListServerCertificates",
         "iam:GetServerCertificate",
-        "waf-regional:GetWebACL",
-        "waf-regional:GetWebACLForResource",
-        "waf-regional:AssociateWebACL",
-        "waf-regional:DisassociateWebACL",
-        "wafv2:GetWebACL",
-        "wafv2:GetWebACLForResource",
-        "wafv2:AssociateWebACL",
-        "wafv2:DisassociateWebACL",
-        "shield:GetSubscriptionState",
-        "shield:DescribeProtection",
-        "shield:CreateProtection",
-        "shield:DeleteProtection"
+        "waf-regional:*",
+        "wafv2:*",
+        "shield:*"
       ],
       "Effect": "Allow",
       "Resource": "*"
