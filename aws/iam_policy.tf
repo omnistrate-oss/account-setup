@@ -422,11 +422,6 @@ resource "aws_iam_policy" "omnistrate-bootstrap-permissions-boundary" {
         "arn:aws:s3:::omnistrate-${data.aws_caller_identity.current.account_id}-dp-pulumi/*"
       ],
       "Sid": "S3Access"
-    },
-    {
-      "Action": "sts:AssumeRole",
-      "Effect": "Allow",
-      "Resource": "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/omnistrate-*"
     }
   ],
   "Version": "2012-10-17"
@@ -592,12 +587,18 @@ resource "aws_iam_policy" "omnistrate-infrastructure-provisioning-policy" {
         "elasticloadbalancing:*",
         "eks:*",
         "elasticfilesystem:*",
-        "autoscaling:*",
-        "sts:AssumeRole"
+        "autoscaling:*"
       ],
       "Effect": "Allow",
       "Resource": "*"
-    }
+    },
+	{
+      "Action": [
+        "sts:AssumeRole"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/omnistrate-*"
+	}
   ],
   "Version": "2012-10-17"
 }
