@@ -1,5 +1,11 @@
 provider "aws" {
   region = "us-east-2"
+
+  default_tags {
+    tags = {
+      "omnistrate.com/managed-by" = "omnistrate"
+    }
+  }
 }
 
 terraform {
