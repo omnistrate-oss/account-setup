@@ -2,6 +2,10 @@ provider "google" {
   # credentials = "path_to_service_account_key.json"
   region  = "us-central1"
   zone    = "us-central1-c"
+
+  default_labels = {
+    "omnistrate-com_managed-by" = "omnistrate"
+  }
 }
 
 variable "project_id" {

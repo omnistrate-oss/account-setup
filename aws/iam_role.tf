@@ -84,6 +84,32 @@ POLICY
   path                 = "/"
 }
 
+resource "aws_iam_role" "omnistrate-terraform-role" {
+  assume_role_policy = <<POLICY
+{
+  "Version": "2012-10-17",
+  "Statement": {
+    "Effect": "Allow",
+    "Action": "sts:AssumeRole",
+    "Principal": {
+      "AWS": "${data.aws_caller_identity.current.account_id}"
+    },
+    "Condition": {
+      "StringLike": {
+        "aws:PrincipalArn": "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/dataplane-agent-iam-role-*"
+      }
+    }
+  }
+}
+POLICY
+
+  description = "Service provider managed role for deployment of terraform resources"
+  managed_policy_arns  = []
+  max_session_duration = "1800"
+  name                 = "omnistrate-terraform-role"
+  path                 = "/"
+}
+
 output "bootstrap-role" {
   value = aws_iam_role.omnistrate-bootstrap-role.arn
 }
