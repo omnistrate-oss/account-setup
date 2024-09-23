@@ -309,7 +309,6 @@ resource "aws_iam_policy" "omnistrate-bootstrap-permissions-boundary" {
         "iam:ResetServiceSpecificCredential",
         "iam:ListInstanceProfileTags",
         "iam:GetServiceLinkedRoleDeletionStatus",
-        "iam:PassRole",
         "iam:ListPolicyTags",
         "iam:CreatePolicyVersion",
         "iam:DeleteInstanceProfile",
@@ -427,6 +426,16 @@ resource "aws_iam_policy" "omnistrate-bootstrap-permissions-boundary" {
       "Action": "sts:AssumeRole",
       "Effect": "Allow",
       "Resource": "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/omnistrate-*"
+    },
+    {
+      "Action": "iam:PassRole",
+      "Effect": "Allow",
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:RequestTag/omnistrate.com/managed-by": "omnistrate"
+        }
+      }
     }
   ],
   "Version": "2012-10-17"
@@ -496,7 +505,6 @@ resource "aws_iam_policy" "omnistrate-bootstrap-policy" {
         "iam:ListInstanceProfileTags",
         "iam:GetServiceLinkedRoleDeletionStatus",
         "iam:ListInstanceProfilesForRole",
-        "iam:PassRole",
         "iam:ListPolicyTags",
         "iam:CreatePolicyVersion",
         "iam:DeleteInstanceProfile",
@@ -539,6 +547,16 @@ resource "aws_iam_policy" "omnistrate-bootstrap-policy" {
         "arn:aws:s3:::omnistrate-${data.aws_caller_identity.current.account_id}-dp-pulumi/*"
       ],
       "Sid": "S3Access"
+    },
+    {
+      "Action": "iam:PassRole",
+      "Effect": "Allow",
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:RequestTag/omnistrate.com/managed-by": "omnistrate"
+        }
+      }
     }
   ],
   "Version": "2012-10-17"
@@ -573,7 +591,12 @@ resource "aws_iam_policy" "omnistrate-infrastructure-provisioning-policy" {
         "arn:aws:iam::*:role/omnistrate-eks-iam-role",
         "arn:aws:iam::*:role/omnistrate-ec2-node-group-iam-role",
         "arn:aws:iam::*:role/aws-service-role/eks-nodegroup.amazonaws.com/AWSServiceRoleForAmazonEKSNodegroup"
-      ]
+      ],
+      "Condition": {
+        "StringEquals": {
+          "aws:RequestTag/omnistrate.com/managed-by": "omnistrate"
+        }
+      }
     },
     {
       "Action": [
