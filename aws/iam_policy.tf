@@ -433,7 +433,7 @@ resource "aws_iam_policy" "omnistrate-bootstrap-permissions-boundary" {
       "Resource": "*",
       "Condition": {
         "StringEquals": {
-          "aws:RequestTag/omnistrate.com/managed-by": "omnistrate"
+          "aws:ResourceTag/omnistrate.com/managed-by": "omnistrate"
         }
       }
     }
@@ -554,7 +554,7 @@ resource "aws_iam_policy" "omnistrate-bootstrap-policy" {
       "Resource": "*",
       "Condition": {
         "StringEquals": {
-          "aws:RequestTag/omnistrate.com/managed-by": "omnistrate"
+          "aws:ResourceTag/omnistrate.com/managed-by": "omnistrate"
         }
       }
     }
@@ -594,7 +594,7 @@ resource "aws_iam_policy" "omnistrate-infrastructure-provisioning-policy" {
       ],
       "Condition": {
         "StringEquals": {
-          "aws:RequestTag/omnistrate.com/managed-by": "omnistrate"
+          "aws:ResourceTag/omnistrate.com/managed-by": "omnistrate"
         }
       }
     },
