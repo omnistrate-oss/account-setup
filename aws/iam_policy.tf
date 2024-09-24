@@ -436,6 +436,13 @@ resource "aws_iam_policy" "omnistrate-bootstrap-permissions-boundary" {
           "aws:ResourceTag/omnistrate.com/managed-by": "omnistrate"
         }
       }
+    },
+    {
+      "Action": "iam:PassRole",
+      "Effect": "Allow",
+      "Resource": [
+        "arn:aws:iam::*:role/aws-service-role/eks-nodegroup.amazonaws.com/AWSServiceRoleForAmazonEKSNodegroup"
+      ]
     }
   ],
   "Version": "2012-10-17"
@@ -591,12 +598,7 @@ resource "aws_iam_policy" "omnistrate-infrastructure-provisioning-policy" {
         "arn:aws:iam::*:role/omnistrate-eks-iam-role",
         "arn:aws:iam::*:role/omnistrate-ec2-node-group-iam-role",
         "arn:aws:iam::*:role/aws-service-role/eks-nodegroup.amazonaws.com/AWSServiceRoleForAmazonEKSNodegroup"
-      ],
-      "Condition": {
-        "StringEquals": {
-          "aws:ResourceTag/omnistrate.com/managed-by": "omnistrate"
-        }
-      }
+      ]
     },
     {
       "Action": [
