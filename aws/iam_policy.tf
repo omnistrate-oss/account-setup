@@ -441,7 +441,9 @@ resource "aws_iam_policy" "omnistrate-bootstrap-permissions-boundary" {
       "Action": "iam:PassRole",
       "Effect": "Allow",
       "Resource": [
-        "arn:aws:iam::*:role/aws-service-role/eks-nodegroup.amazonaws.com/AWSServiceRoleForAmazonEKSNodegroup"
+        "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/omnistrate-*",
+        "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/ows-ec2-node-group-role",
+        "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/aws-service-role/eks-nodegroup.amazonaws.com/AWSServiceRoleForAmazonEKSNodegroup"
       ]
     }
   ],
@@ -564,6 +566,11 @@ resource "aws_iam_policy" "omnistrate-bootstrap-policy" {
           "aws:ResourceTag/omnistrate.com/managed-by": "omnistrate"
         }
       }
+    },
+    {
+      "Action": "iam:PassRole",
+      "Effect": "Allow",
+      "Resource": "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/omnistrate-*"
     }
   ],
   "Version": "2012-10-17"
