@@ -33,7 +33,7 @@ data "google_project" "current" {
 # Omnistrate bootstrap service account
 resource "google_service_account" "omnistrate_bootstrap" {
   project = data.google_project.current.project_id
-  account_id   = "bootstrap-${lower(var.account_config_identity_id)}"
+  account_id   = "omni-btstrp-${lower(var.account_config_identity_id)}"
   display_name = "Omnistrate Bootstrap Service Account"
 }
 

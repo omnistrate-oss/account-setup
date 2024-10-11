@@ -1,13 +1,17 @@
 resource "google_iam_workload_identity_pool" "pool" {
-  project                   = data.google_project.current.project_id
+  project                   = data.google_project.current.number
   workload_identity_pool_id = "omnistrate-bootstrap-id-pool"
   display_name              = "Omnistrate Access Provider Pool"
   description               = "Workfload Identity Pool for the Omnistrate Control Plane"
   disabled                  = false
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "google_iam_workload_identity_pool_provider" "oidc_provider" {
-  project                            = data.google_project.current.project_id
+  project                            = data.google_project.current.number
   workload_identity_pool_id          = google_iam_workload_identity_pool.pool.workload_identity_pool_id
   workload_identity_pool_provider_id = "omnistrate-oidc-prov"
   display_name                       = "Omnistrate OIDC Provider"
