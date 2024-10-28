@@ -26,3 +26,11 @@ gcloud auth application-default login
 terraform init
 TF_VAR_project_id=<project-id> TF_VAR_project_number=<project-number> TF_VAR_account_config_identity_id=<suffix-from-platform> terraform apply
 ```
+
+NOTE: For brand new GCP accounts, you will need to perform an initialization step. 
+
+- Please create an autopilot gke cluster with defaults.
+- Once it's ready, please re-run the terraform.
+- Once that is complete, you can delete the autopilot gke
+
+It's a long running issue on GCP side where it doesn't setup the default identity pool for gke until the first cluster is created
