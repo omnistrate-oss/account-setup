@@ -105,7 +105,7 @@ POLICY
 
   description = "Service provider managed role for deployment of terraform resources"
   managed_policy_arns  = []
-  max_session_duration = "1800"
+  max_session_duration = "3600"
   name                 = "omnistrate-terraform-role"
   path                 = "/"
 }
