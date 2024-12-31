@@ -13,6 +13,8 @@ TF_VAR_account_config_identity_id=<suffix-from-platform> terraform apply
 ### Ensure the following services are enabled (please replace the `project-id` with your project ID)
 - IAM Service Account Credentials API
 https://console.cloud.google.com/apis/library/iamcredentials.googleapis.com?project=project-id
+- Cloud Resource Manager API
+https://console.cloud.google.com/apis/library/cloudresourcemanager.googleapis.com?project=project-id
 - Compute Engine APIs
 https://console.cloud.google.com/apis/library/compute.googleapis.com?project=project-id
 - Kubernetes Engine APIs
