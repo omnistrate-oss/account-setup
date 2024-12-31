@@ -47,3 +47,9 @@ resource "google_service_account_iam_member" "dataplane_service_association" {
   role               = "roles/iam.workloadIdentityUser"
   member             = "serviceAccount:${data.google_project.current.project_id}.svc.id.goog[dataplane-agent/omnistrate-da-${lower(var.account_config_identity_id)}]"
 }
+
+resource "google_service_account_iam_member" "dataplane_service_association_terraform" {
+  service_account_id = google_service_account.omnistrate_terraform.id
+  role               = "roles/iam.workloadIdentityUser"
+  member             = "serviceAccount:${data.google_project.current.project_id}.svc.id.goog[dataplane-agent/omnistrate-da-${lower(var.account_config_identity_id)}]"
+}
