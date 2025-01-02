@@ -17,6 +17,8 @@ https://console.cloud.google.com/apis/library/iamcredentials.googleapis.com?proj
 https://console.cloud.google.com/apis/library/compute.googleapis.com?project=project-id
 - Kubernetes Engine APIs
 https://console.cloud.google.com/apis/library/container.googleapis.com?project=project-id
+- Cloud Resource Manager APIs
+https://console.cloud.google.com/marketplace/product/google/cloudresourcemanager.googleapis.com?project=project-id
 
 then run the following commands:
 
