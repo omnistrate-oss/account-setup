@@ -385,3 +385,12 @@ main "$@"
 
 # Example 2: Setup with custom Terraform roles
 # ./gcp.sh --project-id my-project-id --project-number 123456789012 --account-config-id my-config-id --bootstrap-service-account-name bootstrap-dev-sa --issuer-uri https://oidc.eks.us-west-2.amazonaws.com/id/$OIDC_ID --service-model-roles "model1:role1,role2 model2:role3,role4"
+#
+https://console.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/maziarkaveh/account-setup&cloudshell_working_dir=gcp/shell&cloudshell_cmd=ls
+
+https://console.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/maziarkaveh/account-setup&cloudshell_workspace=gcp/shell&cloudshell_ephemeral=true&cloudshell_cmd=sh%20./gcp.sh%20\
+--project-id%20sinuous-concept-448502-v4%20\
+--project-number%201070032239947%20\
+--account-config-id%20org-EUVvex3bVm%20\
+--bootstrap-service-account-name%20bootstrap-dev-sa%20\
+--issuer-uri%20https://oidc.eks.us-west-2.amazonaws.com/id/C339DC3726AD36506FB7ABE55754784F
